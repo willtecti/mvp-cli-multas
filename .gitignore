@@ -11,7 +11,7 @@ react-app/.pnp.js
 react-app/coverage
 
 # production
-react-app/build
+#react-app/build
 
 # misc
 react-app/.DS_Store
