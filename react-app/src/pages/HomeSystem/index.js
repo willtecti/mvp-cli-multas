@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import InternalTemplate from '../../templates/Internal'
 import service from '../../services/api'
+import Loading from '../../components/Loading'
+import Error from '../../components/Error'
 
 const App = () =>{
     
     const [cars, setCars] = useState([])
     const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
    
 
     useEffect( () =>{
@@ -17,15 +20,15 @@ const App = () =>{
     async function getAllVehicles(){
 
         try {
-
+            setLoading(true)
             const res = await service.get('/api/vehicles/')
-            const json = await res.json()
-            console.log('res',res)
-            setCars(json)
+            setCars(res.data)
+            setLoading(false)
             
         } catch (error) {
+            setLoading(false)
             console.error(error)
-            setError(error)
+            setError("Erro de conexão")
         }
 
     }
@@ -40,6 +43,8 @@ const App = () =>{
     return(
         
         <InternalTemplate>
+            {loading && <Loading/>}
+            {error && <Error text={error}/>}
             <div className="row">
                         <div className=" col-12 col-sm-12 col-md-6 col-lg-4 col-xl-2">
                             <div className="card">

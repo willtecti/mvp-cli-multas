@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { secondary} from '../../styles/colors'
+import { secondary,danger} from '../../styles/colors'
 
 
 
@@ -12,5 +12,8 @@ height: 100vh;
 
 box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 transition: all 0.4s;
+
+
+
 
 `;

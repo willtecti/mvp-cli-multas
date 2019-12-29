@@ -20,7 +20,7 @@ const App  = ({children}) => {
     return(
             <Container>
             <nav className="navbar">
-                <a class="navbar-brand" href="#">
+                <a className="navbar-brand" href="#">
                     <HeadSideBar showOnlyIcon={tooggled} >
                         <img src={logo} alt='Logo LW Tecnologia'/>
                         SEEKCAR
@@ -40,7 +40,7 @@ const App  = ({children}) => {
                    
                  
                 <div className='row'>
-                    <div className={ tooggled ?'col-icon' :'col-6 col-sm-5 col-md-4 col-lg-4 col-xl-2'} id="sidebar">
+                    <div className={ tooggled ?'col-icon' :'col-7 col-sm-5 col-md-3 col-lg-4 col-xl-2'} id="sidebar">
                         <Menu showOnlyIcon={tooggled}></Menu>
                     </div>
                     <div className='col' id="navbar">

@@ -11,6 +11,10 @@ export const Container = styled.div`
     color: ${white}
   }
 
+  #content .row{
+    margin: 20px 0px ;
+  }
+
   #sidebar, #navbar{
     margin: 0px;
     padding: 0px;

@@ -5,23 +5,28 @@ import IconLock from '../../assets/cadeado2.svg'
 
 import Logo from '../../components/Logo'
 import Error from '../../components/Error'
+import Loading from '../../components/Loading'
 
 import service from '../../services/api'
 
-import {login} from '../../services/auth'
+import {login, logout} from '../../services/auth'
 
 
 
 
 const App = ({history}) => {
 
+    logout()
+
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false)
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("")
 
     const handleSubmit = async (event) => {
       event.preventDefault();
       setError('')
+      
       if( username == '' || password == ''){
         setError('Por favor preencher todos os campos')
         return
@@ -32,22 +37,22 @@ const App = ({history}) => {
       
       
       try{
-
+        setLoading(true)
         const res = await service.post('/api/auth/token/',params)
 
         const json = await res.json()
-
-        console.log(json)
-
+        setLoading(false)
         if( json.token == null){
           setError(json.non_field_errors)
         }else{
+          setLoading(false)
           login(json.token)
           //console.log(res.data.token)
           history.push('/app');
         }
 
       }catch(e){
+        setLoading(false)
         console.log(e)
         setError(`Erro ao conectar no servidor.
          Tente novamente ou <a href=#> clique aqui </a> e entre em contato com o suporte`)
@@ -80,6 +85,9 @@ const App = ({history}) => {
                   <Form onSubmit={handleSubmit} >
                     
                     {error && <Error text={error}/>}
+                    {loading && <Loading/>}
+
+
 
                     
                     <input

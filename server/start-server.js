@@ -73,6 +73,12 @@ app.post('/api/auth/token/', function (req, res) {
 })
 
 app.get('/api/vehicles/', function (req, res) {
+    const TOKEN = ''
+    console.log('token',req.headers)
+    if(req.headers['Authorization']){
+        TOKEN = req.headers['Authorization']
+        
+    }
     var options = {
         url: 'https://www.seekcar.com.br/api/vehicles/ ',
         method: 'GET',

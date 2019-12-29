@@ -1,5 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 import { getToken } from "./auth";
+
+
 const server = 'http://localhost:2000'
 
 const post = (uri,obj) => {
@@ -7,11 +9,6 @@ const post = (uri,obj) => {
   const headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
   }
-
-// if (token) {
-//   headers.Autorization = `Token ${token}`  
-// }
-
 return fetch(`${server}${uri}`,{
   headers,
   method : 'POST',
@@ -21,16 +18,24 @@ return fetch(`${server}${uri}`,{
 }
 
 
+
 const get = (uri) =>{
   const token = getToken();
-  const headers = {
-    'Accept': 'application/json',
-    'Autorization': `Token ${token}`
-  }
-
-  return fetch(`${server}${uri}`,{
+  const headers = new Headers()
+  headers.append('Authorization', `Token ${token}`) 
+  headers.append('Accept', 'application/json')
+  headers.append("Content-Type", "text/plain");
+  headers.append("Content-Length", "0".toString());
     
-    method: 'GET'
+
+  console.log('headers',headers.get('Authorization'))
+  console.log('token',token)
+
+  return axios.get(`${server}${uri}`,{
+   
+    headers,
+  
+
   })
 
 
@@ -38,4 +43,4 @@ const get = (uri) =>{
   
 
 
-export default { post, get }
+export default { post, get,  }

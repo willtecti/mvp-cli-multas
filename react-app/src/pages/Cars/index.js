@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-
+import Loading from '../../components/Loading'
+import Error from '../../components/Error'
 
 import InternalTemplate from '../../templates/Internal'
 
@@ -15,6 +16,7 @@ const App = () =>{
 
     const [cars, setCars] = useState([])
     const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
 
     useEffect( () =>{
         getAllVehicles()
@@ -23,21 +25,23 @@ const App = () =>{
     async function getAllVehicles(){
 
         try {
-
+            setLoading(true)
             const res = await service.get('/api/vehicles/')
-            const json = await res.json()
-            console.log('res',res)
-            setCars(json)
             
+            setCars(res.data)
+            setLoading(false)
         } catch (error) {
+            setLoading(false)
             console.error(error)
-            setError(error)
+            setError("Erro de conexão")
         }
 
     }
     return(
         <InternalTemplate>
             <Container>
+                {loading && <Loading/>}
+                {error && <Error text={error}/>}
                 <div className="row">
                     {cars.map( car =>{
                         return (

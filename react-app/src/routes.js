@@ -7,6 +7,7 @@ import SignIn from "./pages/SignIn"
 import HomeSystem from "./pages/HomeSystem"
 import Cars from './pages/Cars'
 import Maps from './pages/Maps'
+import LogOut from './pages/LogOut'
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -26,6 +27,7 @@ const Routes = () => (
     <Switch>
       <Route exact path="/" component={SignIn} />
       <Route path="/login" component={SignIn} />
+      <Route path="/logout" component={LogOut} />
       <PrivateRoute exact path="/app" component={HomeSystem} />
       <PrivateRoute exact path="/app/cars" component={Cars} />
       <PrivateRoute exact path="/app/location" component={Maps} />

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {dark, white} from '../../styles/colors'
+import {dark, white, danger} from '../../styles/colors'
 
 export const Container = styled.li`
   div {
@@ -26,5 +26,13 @@ export const Container = styled.li`
     background-color: ${dark(0.5)};
     cursor: pointer;
   }
+
+  div.danger:hover {
+    background-color: ${danger(0.5)};
+    cursor: pointer;
+  }
+
+ 
+
 `;
 
