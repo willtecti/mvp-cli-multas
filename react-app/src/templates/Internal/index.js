@@ -1,26 +1,54 @@
-import React from 'react'
-
-import { Container, Navbar, SubNavbar } from './styles'
+import React, {useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
+import {GiHamburgerMenu} from 'react-icons/gi'
+import { Container, Navbar, HeadSideBar } from './styles'
 import Logo from '../../components/Logo'
 import Title from '../../components/Title'
 import Menu from '../../containers/Menu'
+import logo from '../../assets/Logo_LW_Azul.png'
+
+
 
 
 const App  = ({children}) => {
+    const [ tooggled, setToggled] = useState(false)
+
+    const navToggle = () => {
+        setToggled(!tooggled)
+    }
 
     return(
- 
-            <Container>          
+            <Container>
+            <nav className="navbar">
+                <a class="navbar-brand" href="#">
+                    <HeadSideBar showOnlyIcon={tooggled} >
+                        <img src={logo} alt='Logo LW Tecnologia'/>
+                        SEEKCAR
+                        
+                    </HeadSideBar>
+                    
+                    </a>  
+                    <Link className="nav-link" onClick={navToggle} >
+                        <GiHamburgerMenu/>
+                    </Link> 
+                       
+                          
+                    
+                    
+            </nav>       
+            <div className='container-fluid'>
+                   
                  
                 <div className='row'>
-                    <div className='col-2' id="sidebar">
-                        <Menu></Menu>
+                    <div className={ tooggled ?'col-icon' :'col-6 col-sm-5 col-md-4 col-lg-4 col-xl-2'} id="sidebar">
+                        <Menu showOnlyIcon={tooggled}></Menu>
                     </div>
-                    <div className='col-10' id="navbar">
+                    <div className='col' id="navbar">
+                        <div className='row'>
+                            <div className='col'>
                         
-                        <Navbar>
-                        
-                        </Navbar>
+                        </div>
+                        </div>
                         <div className='row'>
                             <div className='col' id="content">
                                 {children}
@@ -31,6 +59,7 @@ const App  = ({children}) => {
                 </div>    
                         
                 
+            </div>
             </Container>
     )
 }

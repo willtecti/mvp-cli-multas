@@ -1,27 +1,21 @@
 import React from 'react'
-import {Container, Ul, Li, HeadSideBar} from './styles'
-import Logo from '../../components/Logo';
-import { FaServicestack, FaCar} from 'react-icons/fa';
+import {Container} from './styles'
+import {  FaCar} from 'react-icons/fa';
 import { MdDashboard} from 'react-icons/md';
-import { TiDocumentText} from 'react-icons/ti';
-import { GiPathDistance, GiGasPump} from 'react-icons/gi';
+import { GiPathDistance} from 'react-icons/gi';
 import ItemSideMenu from  '../../components/ItemSideMenu'
 
-const App = () =>{
+const App = ({showOnlyIcon}) =>{
     return(
         <Container>
-            <HeadSideBar>
-                <Logo/>
-            </HeadSideBar>
             
-            <Ul>
-                <ItemSideMenu Icon={MdDashboard} Text="Dashboard"/>
-                <ItemSideMenu Icon={FaCar} Text="Carros"/>
-                <ItemSideMenu Icon={GiPathDistance} Text="Distância"/>
-                <ItemSideMenu Icon={GiGasPump} Text="Consumo de combustível"/>
-                <ItemSideMenu Icon={FaServicestack} Text="Serviços do Dentran"/>
-                <ItemSideMenu Icon={TiDocumentText} Text="/ItemSideMenu"/>
-            </Ul>
+            
+            <div className='nav flex-column'>
+                <ItemSideMenu showOnlyIcon={showOnlyIcon} Icon={MdDashboard} Text="Dashboard" To="/app"/>
+                <ItemSideMenu showOnlyIcon={showOnlyIcon} Icon={FaCar} Text="Frota" To="/app/cars"/>
+                <ItemSideMenu showOnlyIcon={showOnlyIcon} Icon={GiPathDistance} Text="Localização" To="/app/location"/>
+                
+            </div>
 
         </Container>
     )

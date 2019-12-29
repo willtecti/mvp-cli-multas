@@ -5,6 +5,8 @@ import { isAuthenticated } from "./services/auth";
 //componests imports
 import SignIn from "./pages/SignIn"
 import HomeSystem from "./pages/HomeSystem"
+import Cars from './pages/Cars'
+import Maps from './pages/Maps'
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -22,9 +24,15 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={() => <h1>Login</h1>} />
+      <Route exact path="/" component={SignIn} />
       <Route path="/login" component={SignIn} />
-      <PrivateRoute path="/app" component={HomeSystem} />
+      <PrivateRoute exact path="/app" component={HomeSystem} />
+      <PrivateRoute exact path="/app/cars" component={Cars} />
+      <PrivateRoute exact path="/app/location" component={Maps} />
+      <PrivateRoute exact path="/app/consumption" component={HomeSystem} />
+      <PrivateRoute exact path="/app/detran-service" component={HomeSystem} />
+      <PrivateRoute exact path="/app/report" component={HomeSystem} />
+     
       <Route path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   </BrowserRouter>

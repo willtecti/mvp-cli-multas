@@ -4,56 +4,84 @@ import {Container, Card, Form, Center, SubTitle} from './styles'
 import IconLock from '../../assets/cadeado2.svg'
 
 import Logo from '../../components/Logo'
+import Error from '../../components/Error'
 
 import service from '../../services/api'
 
-import axios from 'axios'
+import {login} from '../../services/auth'
 
 
-const App = () => {
+
+
+const App = ({history}) => {
 
     const [error, setError] = useState(null);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("")
+
     const handleSubmit = async (event) => {
       event.preventDefault();
+      setError('')
+      if( username == '' || password == ''){
+        setError('Por favor preencher todos os campos')
+        return
+      }
       const params = new URLSearchParams();
       params.append('username', username);
       params.append('password', password);
-      const token = await axios.post('https://www.seekcar.com.br/api/auth/token/',params,{
-        headers:{
-        'Content-type': 'application/json',
-        'Access-Control-Allow-Credentials': true,
-        'Access-Control-Allow-Origin': '*',
-        
-        
-      },
-    })
+      
+      
+      try{
+
+        const res = await service.post('/api/auth/token/',params)
+
+        const json = await res.json()
+
+        console.log(json)
+
+        if( json.token == null){
+          setError(json.non_field_errors)
+        }else{
+          login(json.token)
+          //console.log(res.data.token)
+          history.push('/app');
+        }
+
+      }catch(e){
+        console.log(e)
+        setError(`Erro ao conectar no servidor.
+         Tente novamente ou <a href=#> clique aqui </a> e entre em contato com o suporte`)
+         setUsername("")
+         setPassword("")
+        }    
  
-     setError('Usuário ou senha incorreto')
+     
 
   }
     return (
         <Container>
           <Card>
             <div className="row">
-              <div className='col'>
+              <div className='col-12 col-sm-6'>
                   <Center>
                     <img src={IconLock} alt="Tela de Login" style={{width: 100}}/>  
                   </Center>
               </div>
-              <div className='col'>
+              <div className='col-12 col-sm-6'>
                 <Center>
                     <Logo></Logo>
                 </Center>
+                <SubTitle> Rastreamento Veicular</SubTitle>
               </div>
             </div>
               <div className="row">
-                <div className='col'>
+                <div className='col-12 col-sm-6'>
             
                   <Form onSubmit={handleSubmit} >
                     
-                    {error && <p>{error}</p>}
+                    {error && <Error text={error}/>}
+
+                    
                     <input
                       type="text"
                       placeholder="Nome de usuário"
@@ -73,8 +101,8 @@ const App = () => {
                   </Form>
                 </div>
 
-              <div className="col">
-                <SubTitle> Rastreamento Veicular</SubTitle>
+              <div className="col-12 col-md-6">
+                
               </div>
               </div>
           </Card>

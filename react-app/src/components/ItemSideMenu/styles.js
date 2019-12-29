@@ -1,17 +1,30 @@
 import styled from "styled-components";
-import {primary, secondary, gold, gray, dark, white, danger} from '../../styles/colors'
+import {dark, white} from '../../styles/colors'
 
 export const Container = styled.li`
   div {
       width: 100%;
-      padding: 20px;
+      padding: 10px 40px;
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      color: ${white};
   }
 
-  a {
+  span {
       text-align: center;
-      color: 
+      margin-left: 10px;
+      
+  }
+
+  a: {
+    text-decoration: none;
+    color: ${white};
+  }
+
+  div:hover {
+    background-color: ${dark(0.5)};
+    cursor: pointer;
   }
 `;
+

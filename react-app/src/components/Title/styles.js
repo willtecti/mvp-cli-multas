@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import {primary,secondary,dark,white} from '../../styles/colors'
+import {secondary} from '../../styles/colors'
 
 
 

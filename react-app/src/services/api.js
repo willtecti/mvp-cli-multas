@@ -1,18 +1,41 @@
 import axios from "axios";
 import { getToken } from "./auth";
+const server = 'http://localhost:2000'
 
-const api = axios.create({
-  baseURL: "https://www.seekcar.com.br"
-});
-
-api.interceptors.request.use(async config => {
-  const token = getToken();
+const post = (uri,obj) => {
   
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
-    
+  const headers = {
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
   }
-  return config;
-});
 
-export default api;
+// if (token) {
+//   headers.Autorization = `Token ${token}`  
+// }
+
+return fetch(`${server}${uri}`,{
+  headers,
+  method : 'POST',
+  body: obj
+})
+
+}
+
+
+const get = (uri) =>{
+  const token = getToken();
+  const headers = {
+    'Accept': 'application/json',
+    'Autorization': `Token ${token}`
+  }
+
+  return fetch(`${server}${uri}`,{
+    
+    method: 'GET'
+  })
+
+
+}
+  
+
+
+export default { post, get }

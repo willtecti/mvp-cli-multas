@@ -3,9 +3,10 @@ import {primary, secondary, dark, white, danger} from '../../styles/colors'
 
 export const Container = styled.div`
   display: flex;
+  width: 100vw;
+  height: 100vh;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   background: rgb(52,166,191);
   background: linear-gradient(180deg, rgba(52,166,191,1) 0%, rgba(45,91,204,1) 100%);
 
@@ -18,10 +19,10 @@ export const SubTitle = styled.h2`
 
 export const Card = styled.div`
   background: ${white};
-  border-radius: 15px;
-  width: 1100px;
+  
+  width: 60em;
   min-height: 600px;
-  min-width: 400px;
+  min-width: 200px;
   padding : 30px;
 
   -webkit-box-shadow: 0px 5px 10px 3px rgba(0,0,0,0.53);
@@ -47,14 +48,7 @@ export const Form = styled.form`
   padding-top: 3em;
 
   
-  p {
-    color: #ff3333;
-    margin-bottom: 15px;
-    border: 1px solid #ff3333;
-    padding: 10px;
-    width: 100%;
-    text-align: center;
-  }
+ 
   input {
     flex: 1;
     min-height: 46px;
