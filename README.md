@@ -4,6 +4,8 @@ MVP de um software para gerenciamento de multas
 ## Configuração
 Execute o comando `git clone https://github.com/willtecti/mvp-cli-multas`
 
+Digite `mvp-cli-multas` para acessar a pasta do projeto
+
 Acesse o diretório server: ` cd server`
 Baixe as depedências do projeto através do: `npm install`
 Ao finalizar execute o comando `node start-server.js` ou `nodemon start-server.js`
