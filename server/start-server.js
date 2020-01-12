@@ -2,6 +2,8 @@
 var express = require('express');
 var app = express();
 const request = require('request');
+const cheerio = require('cheerio')
+
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -95,6 +97,30 @@ app.get('/api/vehicles/', function (req, res) {
 
   });
 })
+
+
+app.get('/api/houses/', function (req, res) {
+  var options = {
+    url: `https://www.vivareal.com.br/aluguel/parana/curitiba/#onde=BR-Parana-NULL-Curitiba&preco-ate=1200&quartos=1&vagas=1`,
+    method: 'GET',
+   
+  };
+  
+  request.get(options, async function(err, response, body) {
+      const $ = cheerio.load(body)
+      const articles = $('span.property-card__address')
+      const houses = articles.text().trim().split('\n')  
+      const houses_clean = houses.filter( el =>{
+        return el.includes('PR')
+      })
+     
+      
+      res.json(houses_clean)
+      
+
+  });
+})
+
   
   app.listen(2000, function () {
     console.log('Example app listening on port 2000!');

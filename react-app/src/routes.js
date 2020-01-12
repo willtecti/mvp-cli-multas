@@ -7,6 +7,7 @@ import SignIn from "./pages/SignIn"
 import HomeSystem from "./pages/HomeSystem"
 import Cars from './pages/Cars'
 import Maps from './pages/Maps'
+import Houses from './pages/Houses'
 import LogOut from './pages/LogOut'
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -34,6 +35,7 @@ const Routes = () => (
       <PrivateRoute exact path="/app/consumption" component={HomeSystem} />
       <PrivateRoute exact path="/app/detran-service" component={HomeSystem} />
       <PrivateRoute exact path="/app/report" component={HomeSystem} />
+      <Route exact path="/app/house" component={Houses} />
      
       <Route path="*" component={() => <h1>Page not found</h1>} />
     </Switch>

@@ -14,7 +14,7 @@ const Properties = ({ properties }) =>
       latitude={property.last_position.lat}
     >
       <Pin>
-        <Link to="">{property.license_plate}</Link>
+        <a target="_blank" href={property.url} title={property.address}>{property.license_plate}</a>
       </Pin>
     </Marker>
   ));

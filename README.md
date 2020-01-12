@@ -14,5 +14,5 @@ Ao finalizar execute o comando `node start-server.js` ou `nodemon start-server.j
 Acesse o diretório `react-app` em outro terminal.
 Baixe as depedências do projeto através do: `npm install`
 Execute o comando `npm start` para executar o  servidor de desenvolvimento
-Acesse `localhost:300` para visualizar a página de login. 
+Acesse `localhost:3000` para visualizar a página de login. 
 
